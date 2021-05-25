@@ -21,10 +21,12 @@ let data = JSON.parse(
 req.body["id"]=nanoid();
 data.push(req.body);
 
-fs.writeFileSync(path.join(__dirname,'../db/db.json'),JSON.stringify(data));
+fs.writeFileSync(path.join(__dirname,'../db/db.json'), JSON.stringify(data));
+res.send('send messagre');
+
     });
 
-
+// delete posts
 app.delete('/api/notes/:id', (req,res) => {
     let data = JSON.parse( 
         fs.readFileSync(path.join(__dirname,'../db/db.json'),'utf8')
@@ -32,5 +34,6 @@ app.delete('/api/notes/:id', (req,res) => {
     let remove = data.filter((entry)=> {return entry.id !== req.params.id})
     
     fs.writeFileSync(path.join(__dirname,'../db/db.json'), JSON.stringify(remove));
+    res.send('mseeage sent');
 });
 };
